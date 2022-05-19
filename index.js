@@ -36,14 +36,28 @@ function test(){
 console.log(test());
 test()
 
-document.getElementById('sikaku').addEventListener('click',function(){
+document.getElementById('sikaku').addEventListener('mouseenter',function(){
     this.style.backgroundColor = "blue"
-    this.style.color = "white"
-    this.style.fontSize = "28px"
-    console.log("クリックされた！");
+    // this.style.color = "white"
+    // this.style.fontSize = "28px"
+    // console.log("クリックされた！");
+})
+document.getElementById('sikaku').addEventListener('mouseleave',function(){
+    this.style.backgroundColor = "red"
+    // this.style.color = "white"
+    // this.style.fontSize = "28px"
+    // console.log("クリックされた！");
 })
 /*
 document…html全体から
 getElementById('sikaku')…idが'sikaku'の要素を探せ
 addEventListener('click',function(){})…クリックしたらこの関数を実行せよ
+addEventListener('イベントの種類','内容つまり関数')
 */
+
+document.getElementById('sikaku').addEventListener('click',function(){
+    this.style.backgroundColor = "green"
+})
+document.getElementById('sikaku').addEventListener('dblclick',function(){
+    this.style.backgroundColor = "black"
+})
