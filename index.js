@@ -44,9 +44,6 @@ document.getElementById('sikaku').addEventListener('mouseenter',function(){
 })
 document.getElementById('sikaku').addEventListener('mouseleave',function(){
     this.style.backgroundColor = "red"
-    // this.style.color = "white"
-    // this.style.fontSize = "28px"
-    // console.log("クリックされた！");
 })
 /*
 document…html全体から
