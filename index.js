@@ -58,3 +58,11 @@ document.getElementById('sikaku').addEventListener('click',function(){
 document.getElementById('sikaku').addEventListener('dblclick',function(){
     this.style.backgroundColor = "black"
 })
+
+document.addEventListener("keydown",keyDown,true);
+
+function keyDown(e){
+    if(e.keyCode == 32){
+        console.log("通過");
+    }
+}
