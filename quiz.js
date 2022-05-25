@@ -65,6 +65,20 @@ function mouseDown(event) {
     }
 }
 
+document.addEventListener("mouseup", mouseUp, true);
+
+function mouseUp(event){
+    if(event.which == 1){
+        console.log("左クリック離された");
+    }
+    if(event.which == 2){
+        console.log("中クリック離された");
+    }
+    if(event.which == 3){
+        console.log("右クリック離された");
+    }
+}
+
 window.addEventListener('contextmenu', function(e){
     e.preventDefault();
   });
