@@ -49,3 +49,30 @@ function keyDown(e) {
         ansFlag = true;
     }
 }
+
+document.addEventListener("mousedown", mouseDown, true);
+
+function mouseDown(event) {
+    event.preventDefault();
+    if(event.which == 1){
+        console.log("左クリック");
+    }
+    if(event.which == 2){
+        console.log("中クリック");
+    }
+    if(event.which == 3){
+        console.log("右クリック");
+    }
+}
+
+window.addEventListener('contextmenu', function(e){
+    e.preventDefault();
+  });
+
+  window.oncontextmenu = function(){
+    return false;
+  };
+
+  window.onmousewheel = function(event){
+	console.log(event.wheelDelta);
+}
