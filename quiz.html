@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,16 +10,8 @@
         body {
             margin-left: 50px;
         }
-        #answerA {
-            width:400px;
-            height: 85px;
-            margin-bottom: 20px;
-            background-color: wheat;
-            font-size: 300%;
-            padding-top: 15px;
-            text-align: center;
-        }
-        #answerB {
+
+        #answerAll div {
             width: 400px;
             height: 85px;
             margin-bottom: 20px;
@@ -27,23 +20,11 @@
             padding-top: 15px;
             text-align: center;
         }
-        #answerC {
-            width: 400px;
-            height: 85px;
-            margin-bottom: 20px;
-            background-color: wheat;
-            font-size: 300%;
-            padding-top: 15px;
-            text-align: center;
+
+        .ansFont {
+            color: blue;
         }
-        #answerD {
-            width: 400px;
-            height: 85px;
-            background-color: wheat;
-            font-size: 300%;
-            padding-top: 15px;
-            text-align: center;
-        }
+
         #space {
             margin-left: 200px;
             margin-top: 50px;
@@ -51,26 +32,31 @@
         }
     </style>
 </head>
+
 <body>
     <div id="mondai">
         <h2>問１：うちの猫は？</h2>
     </div>
 
-    <div id="answerA">
-        <div>かわいい</div>
-    </div>
-    <div id="answerB">
-        <div>超かわいい</div>
-    </div>
-    <div id="answerC">
-        <div>テラかわいい</div>
-    </div>
-    <div id="answerD">
-        <div>マジかわいい</div>
+    <div id="answerAll">
+        <div id="answerA">
+            かわいい
+        </div>
+        <div id="answerB">
+            超かわいい
+        </div>
+        <div id="answerC">
+            テラかわいい
+        </div>
+        <div id="answerD">
+            マジかわいい
+        </div>
     </div>
     <div id="space">
         <div>※スペース押下で次の問題</div>
     </div>
+    <!-- <canvas id="canvas"></canvas> -->
     <script src="quiz.js"></script>
 </body>
+
 </html>

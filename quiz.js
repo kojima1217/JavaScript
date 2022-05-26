@@ -1,6 +1,9 @@
 let ansFlag = true;
+// var field = document.getElementById("canvas");
+// field.width = 200;
+// field.height = 200;
 
-document.getElementById('answerA').addEventListener('click', function () {
+document.querySelector("#answerA").addEventListener('click', function () {
     if (ansFlag) {
         this.textContent = "もう一声"
         this.style.color = "blue"
