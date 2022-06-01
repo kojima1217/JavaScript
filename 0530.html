@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .hotDay {
+            color: red;
+        }
+        .hotHotDay {
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+    <div>今日は暑い</div>
+
+    <script>
+        // id属性を追加する（setAttribute）
+        document.querySelector("div").setAttribute("id","hot");
+        // class属性を追加する
+        document.querySelector("div").setAttribute("class","hotDay");
+
+    
+        // classListでclass属性を追加する
+        document.querySelector("div").classList.add("hotHotDay");
+        // 削除するclassを指定する
+        document.querySelector("div").classList.remove("hotHotDay");
+
+        // classが2つ以上でも一気に全部消す（removeAttribute）
+        document.querySelector("div").removeAttribute("class");
+
+
+        // p119 switch文
+        const whichCase = "case1";
+
+        switch(whichCase){
+            case "case1":
+                console.log("case1 実行");
+                break;
+            case "case2":
+                console.log("case2 実行");
+                break;
+            default:
+                console.log("Default 実行");
+        }
+
+        // p130 while文
+        let i = 0;
+        while(i < 5){
+            console.log(i);
+            i++;
+        }
+
+        // p133 for文
+        for(let i = 0; i < 10; i+=3){
+            console.log(i);
+        }
+
+        const fruitArray = ["りんご", "メロン", "みかん"];
+        console.log(fruitArray[0]);
+        console.log(fruitArray[1]);
+        console.log(fruitArray[2]);
+
+        fruitArray[0] = "バナナ";
+
+        // Javaと違って勝手に追加もできる
+        fruitArray[3] = "スイカ";
+
+        console.log(fruitArray);
+
+        if(fruitArray[0] == "バナナ"){
+            console.log(fruitArray.length);
+        }
+
+        const numArray = [10,20,30];
+        for(let index = 0; index < numArray.length; index++){
+            numArray[index] = numArray[index] + 10;
+        }
+
+        console.log(numArray);
+
+        // p64 オブジェクト（オブジェクト思考とは別物）
+        // strPropをプロパティもしくはキー
+        // "文字列"を値(value)と呼び、２つ合わせてオブジェクトと呼ぶ
+        // オブジェクトは{}で囲む
+        // キーと値は「:」で繋げ、その後ろは「,」をつける
+        const obj = {
+            strProp: "文字列",
+            intProp: 123,
+            objectProp: {
+                subProp: "値",
+            },
+            intProp: 456,
+            boolProp: false,
+        }
+        
+        // p65 ドット記法
+        // obj.intPropのように「.」ドットで繋げる書き方のこと
+        // document.body とは documentオブジェクトのbodyプロパティの値ということ
+        console.log(obj.intProp);
+        let person = {
+            name: { first: "太郎", last: "独習" },
+            age: 18
+        };
+        console.log(person.age);
+
+    </script>
+</body>
+</html>
