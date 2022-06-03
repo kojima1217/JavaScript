@@ -3,6 +3,12 @@ let ansFlag = true;
 // field.width = 200;
 // field.height = 200;
 
+const answers = ["かわいい", "超かわいい", "テラかわいい", "マジかわいい"];
+const answerIDs = ["answerA","answerB","answerC","answerD"];
+for(let i = 0; i < answerIDs.length; i++){
+    document.getElementById(answerIDs[i]).textContent = answers[i];
+}
+
 document.querySelector("#answerA").addEventListener('click', function () {
     if (ansFlag) {
         this.textContent = "もう一声"
