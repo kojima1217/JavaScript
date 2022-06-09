@@ -3,41 +3,76 @@ let ansFlag = true;
 // field.width = 200;
 // field.height = 200;
 
+let rockFlag = false;
+
 const answers = ["かわいい", "超かわいい", "テラかわいい", "マジかわいい"];
 const answerIDs = ["answerA","answerB","answerC","answerD"];
 for(let i = 0; i < answerIDs.length; i++){
     document.getElementById(answerIDs[i]).textContent = answers[i];
 }
 
-document.querySelector("#answerA").addEventListener('click', function () {
-    if (ansFlag) {
-        this.textContent = "もう一声"
-        this.style.color = "blue"
-        ansFlag = false;
+const makeQuiz = (nameID,text,color) => {
+    document.querySelector(nameID).addEventListener('click', function () {
+        if (ansFlag) {
+            this.textContent = text;
+            this.style.color = color;
+            rockFlag = true;
+            ansFlag = false;
+        }
+    })
+}
+
+makeQuiz("#answerA", "もう一声", "blue");
+makeQuiz("#answerB", "おしい", "blue");
+makeQuiz("#answerC", "天才", "red");
+makeQuiz("#answerD", "それな", "blue");
+
+
+const jikangire = (nameID2) => {
+    document.querySelector(nameID2).textContent = "時間切れ";
+    document.querySelector(nameID2).color = "black";
+}
+
+setTimeout(() => {
+    if(!rockFlag){
+    ansFlag = false;
+    jikangire("#answerA");
+    jikangire("#answerB");
+    jikangire("#answerC");
+    jikangire("#answerD");
     }
-})
-document.getElementById('answerB').addEventListener('click', function () {
-    if (ansFlag) {
-        this.textContent = "おしい"
-        this.style.color = "blue"
-        ansFlag = false;
-    }
-})
-document.getElementById('answerC').addEventListener('click', function () {
-    if (ansFlag) {
-        this.textContent = "天才"
-        this.style.color = "red"
-        ansFlag = false;
-    }
-})
-document.getElementById('answerD').addEventListener('click', function () {
-    if (ansFlag) {
-        this.textContent = "それな"
-        this.style.color = "blue"
-        ansFlag = false;
-    }
-})
+}, 5000);
+
+// document.querySelector("#answerA").addEventListener('click', function () {
+//     if (ansFlag) {
+//         this.textContent = "もう一声"
+//         this.style.color = "blue"
+//         ansFlag = false;
+//     }
+// })
+// document.getElementById('answerB').addEventListener('click', function () {
+//     if (ansFlag) {
+//         this.textContent = "おしい"
+//         this.style.color = "blue"
+//         ansFlag = false;
+//     }
+// })
+// document.getElementById('answerC').addEventListener('click', function () {
+//     if (ansFlag) {
+//         this.textContent = "天才"
+//         this.style.color = "red"
+//         ansFlag = false;
+//     }
+// })
+// document.getElementById('answerD').addEventListener('click', function () {
+//     if (ansFlag) {
+//         this.textContent = "それな"
+//         this.style.color = "blue"
+//         ansFlag = false;
+//     }
+// })
 document.addEventListener("keydown", keyDown, true);
+
 
 function keyDown(e) {
     if (e.keyCode == 32) {
@@ -71,6 +106,7 @@ function mouseDown(event) {
     }
     if(event.which == 3){
         console.log("右クリック");
+        flagA= false;
     }
 }
 
@@ -95,7 +131,20 @@ window.addEventListener('contextmenu', function(e){
   window.oncontextmenu = function(){
     return false;
   };
-
+  let i = 0;
   window.onmousewheel = function(event){
-	console.log(event.wheelDelta);
+	//console.log(event.wheelDelta);
+    
+    if(event.wheelDelta > 0){
+        i--;
+    }else{
+        i++;
+    }
+    if(i > 3){
+        i = 0;
+    }
+    if(i < 0){
+        i = 3;
+    }
+    console.log(i);
 }
