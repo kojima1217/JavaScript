@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <style>
+        @font-face {
+            font-family: 'Hachi Maru Pop', cursive;
+            src: url(http://themes.googleusercontent.com/static/fonts/chelaone/v1/DHUBEAsCcSRMyWTJ6sisfj8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+        }
+
+        #hako {
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        #game {
+            width: 500px;
+            height: 500px;
+            border: 1px solid red;
+        }
+
+        #test {}
+    </style>
+</head>
+
+<body>
+    やられっちゃった
+    <div id="hako">
+        <canvas id="game">
+        </canvas>
+    </div>
+
+    <script>
+        window.addEventListener("load", function () {
+            const canvas = document.getElementById("game");
+            canvas.width = canvas.height = 500;
+            const ctx = canvas.getContext("2d");
+            ctx.fillStyle = "blue";
+            ctx.font = "normal 30px 'Hachi Maru Pop'";
+            ctx.fillText("やられっちゃった", 0, 30);
+        });
+        register(function () { });
+    </script>
+</body>
+
+</html>
