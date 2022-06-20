@@ -8,14 +8,28 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap" rel="stylesheet">
+    
     <title>Document</title>
     <style>
-        @font-face {
+        /* @font-face {
             font-family: 'Hachi Maru Pop', cursive;
             src: url(http://themes.googleusercontent.com/static/fonts/chelaone/v1/DHUBEAsCcSRMyWTJ6sisfj8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+        } */
+
+        body {
+            background-color: white;
         }
 
-        #hako {
+        body div {
+            font-family: 'Hachi Maru Pop', cursive;
+            font-size: 300%;
+            margin-top: 100px;
+            text-align: center;
+            color: yellow;
+            text-shadow: 1px 1px 0 black,-1px 1px 0 black,1px -1px 0 black,-1px -1px 0 black;
+        }
+
+        /* #hako {
             margin-left: auto;
             margin-right: auto;
             text-align: center;
@@ -25,20 +39,22 @@
             width: 500px;
             height: 500px;
             border: 1px solid red;
-        }
+        } */
 
-        #test {}
     </style>
 </head>
 
 <body>
-    やられっちゃった
-    <div id="hako">
+
+    <div>
+        草原に現れる召喚コウモリの退治
+    </div>
+    <!-- <div id="hako">
         <canvas id="game">
         </canvas>
-    </div>
+    </div> -->
 
-    <script>
+    <!-- <script>
         window.addEventListener("load", function () {
             const canvas = document.getElementById("game");
             canvas.width = canvas.height = 500;
@@ -48,7 +64,7 @@
             ctx.fillText("やられっちゃった", 0, 30);
         });
         register(function () { });
-    </script>
+    </script> -->
 </body>
 
 </html>
