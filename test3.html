@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #hako {
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px black solid;
+            /* margin :100px auto 0px auto; */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="hako">
+        <canvas id="can">
+        </canvas>
+    </div>
+
+    <script>
+        let can = document.getElementById("can");
+        let con = can.getContext("2d");
+        can.width = 800;
+        can.height = 800;
+
+        let testA = 0;
+        let testB = 0;
+
+        testA = -60 * (Math.PI / 180);
+        testB = 60 * (Math.PI / 180);
+        //testB = 1.0 * (180 / Math.PI);
+
+        function loop() {
+            con.fillStyle = "black";
+            con.fillText(testA, 50, 50);
+            con.fillText(testB, 50, 70);
+
+            // con.beginPath();
+            // con.moveTo(500, 300);
+            // con.lineTo(500, 300);
+            // con.arc(500, 300, 150, testA, testB, false);
+            // con.fillStyle = "blue";
+
+            // con.fill();
+            akun = new Akun(100, 300);
+            bkun = new Bkun(80, 200);
+            akun.draw();
+            bkun.draw();
+            if(hantei(akun.x,akun.y,150, bkun.x,bkun.y,50)){
+                //console.log("ヒット！");
+            }
+
+        }
+
+        function init() {
+            setInterval(loop, 1000 / 60);
+        }
+
+        window.onload = function () {
+            init();
+        }
+
+        function hantei(x1,y1,r1, x2,y2,r2) {
+            let a = (x2-x1);
+            let b = (y2-y1);
+            let r = r1+r2;
+            return r*r >= a*a + b*b;
+        }
+
+        class Boss {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+            }
+            draw() {
+                con.beginPath();
+                con.moveTo(this.x, this.y);
+                con.lineTo(this.x, this.y);
+                con.arc(this.x, this.y, 150, testA, testB, false);
+                con.fillStyle = "blue";
+                con.fill();
+                con.closePath();
+            }
+        }
+
+        class Akun extends Boss{
+            constructor(x,y) {
+                super(x,y);
+            }
+            draw() {
+               super.draw();
+            }
+        }
+
+        class Bkun extends Boss {
+            constructor(x,y) {
+                super(x,y);
+            }
+            draw() {
+                con.beginPath();
+                con.moveTo(this.x, this.y);
+                con.lineTo(this.x, this.y);
+                con.arc(this.x, this.y, 50, 0, Math.PI * 2, false);
+                con.fillStyle = "red";
+                con.fill();
+                con.closePath();
+            }
+        }
+
+    </script>
+</body>
+
+</html>

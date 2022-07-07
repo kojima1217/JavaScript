@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bingo Game</title>
+    <style>
+        body {
+            background-color: bisque;
+        }
+
+        .control {
+            display: flex;
+        }
+
+        .btn1 {
+            background-color: silver;
+            width: 100px;
+            height: 50px;
+            border: 1px black solid;
+            margin: 10px 10px 10px 30px;
+            text-align: center;
+            padding-top: 20px;
+            font-size: 100%;
+        }
+
+        .btn2 {
+            background-color: gold;
+            width: 200px;
+            height: 60px;
+            border: 1px black solid;
+            margin: 10px;
+            text-align: center;
+            padding-top: 10px;
+            font-size: 200%;
+        }
+
+        .bingoNum {
+            background-color: white;
+            width: 200px;
+            height: 60px;
+            margin: 10px;
+            text-align: center;
+            padding-top: 10px;
+            font-size: 200%;
+        }
+
+        .container {
+            width: 500px;
+            height: 510px;
+            margin-left: 50px;
+            padding-left: 5px;
+            border: 1px black solid;
+            background-color: yellow;
+            display: grid;
+            grid-template-columns: 100px 100px 100px 100px 100px;
+            gap: 0px;
+            grid-template-rows: 100px 100px 100px 100px 100px;
+        }
+
+        .slot {
+            height: 65px;
+            width: 60px;
+            padding: 5px;
+            padding-top: 15px;
+            margin: 10px;
+            background-color: orange;
+            color: white;
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid black;
+            border-radius: 5px;
+
+        }
+
+        .win {
+            width: 600px;
+            height: 100px;
+            margin: 10px;
+            color: red;
+            font-size: 300%;
+            /* border: 1px solid black; */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="control">
+        <div class="btn1">スタート</div>
+        <div class="btn2">くじを引く</div>
+        <div class="bingoNum"></div>
+    </div>
+    <div class="container">
+    </div>
+    <div class="win"></div>
+
+    <script>
+        const container = document.querySelector(".container");
+        for (let i = 0; i < 25; i++) {
+            const div = document.createElement("div");
+            div.classList.add("slot");
+
+            container.append(div);
+        }
+
+        const reset = document.querySelector(".btn1");
+        const kuji = document.querySelector(".btn2");
+        const bingoNumBox = document.querySelector(".bingoNum");
+        const slot = document.querySelectorAll(".slot");
+        const winBox = document.querySelector(".win");
+        let saveData = new Array(25).fill(0);
+        let winData = new Array(25).fill(0);
+        let check = [];
+        let bingoNum = 0;
+        let togFlag = true;
+        let win = false;
+
+        let lineUp = [];
+        let num = 0;
+
+        const shuffle = () => {
+            for (let i = 0; i < 76; i++) {
+                while (true) {
+                    let tmp = intRandom(0, 75);
+                    if (!lineUp.includes(tmp)) {
+                        lineUp.push(tmp);
+                        break;
+                    }
+                }
+            }
+        }
+
+        const intRandom = (min, max) => {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        reset.addEventListener("click", function () {
+            win = false;
+            document.querySelector(".win").textContent = "";
+            console.log("リセットボタン");
+            console.log(check);
+            reset.textContent = "リセット";
+            shuffle();
+            for (let i = 0; i < saveData.length; i++) {
+                slotBox(i);
+            }
+        })
+
+        const slotBox = (i) => {
+
+            winData[i] = 0;
+            winData[12] = 1;
+            slot[12].style.backgroundColor = "red";
+            slot[i].style.backgroundColor = "orange";
+
+            if (i != 12) {
+                saveData[i] = lineUp[i];
+                slot[i].textContent = saveData[i];
+                slot[i].style.fontSize = "40px";
+            } else {
+                slot[i].style.fontSize = "30px";
+                slot[i].textContent = "free";
+            }
+
+            kuji.addEventListener('click', function () {
+
+                bingoWin();
+
+                if (win) {
+                    document.querySelector(".win").textContent = "BINGO！";
+                } else {
+                    if (togFlag) {
+                        bingoNum = Math.floor(Math.random() * 76);
+                        bingoNumBox.textContent = bingoNum;
+                        console.log(bingoNum);
+                        console.log(saveData[i]);
+                        console.log("押された");
+                        togFlag = false;
+                    }
+
+                    if (saveData[i] == bingoNum) {
+                        slot[i].style.backgroundColor = "red";
+                        winData[i] = 1;
+                        console.log(saveData[i]);
+                        console.log(bingoNum);
+                        console.log(winData);
+                    }
+
+                }
+            })
+        }
+
+        const bingoWin = () => {
+            if (winData[0] == 1 && winData[1] == 1 && winData[2] == 1 && winData[3] == 1 && winData[4] == 1) win = true;
+            else if (winData[5] == 1 && winData[6] == 1 && winData[7] == 1 && winData[8] == 1 && winData[9] == 1) win = true;
+            else if (winData[10] == 1 && winData[11] == 1 && winData[12] == 1 && winData[13] == 1 && winData[14] == 1) win = true;
+            else if (winData[15] == 1 && winData[16] == 1 && winData[17] == 1 && winData[18] == 1 && winData[19] == 1) win = true;
+            else if (winData[20] == 1 && winData[21] == 1 && winData[22] == 1 && winData[23] == 1 && winData[24] == 1) win = true;
+
+            else if (winData[0] == 1 && winData[5] == 1 && winData[10] == 1 && winData[15] == 1 && winData[20] == 1) win = true;
+            else if (winData[1] == 1 && winData[6] == 1 && winData[11] == 1 && winData[16] == 1 && winData[21] == 1) win = true;
+            else if (winData[2] == 1 && winData[7] == 1 && winData[12] == 1 && winData[17] == 1 && winData[22] == 1) win = true;
+            else if (winData[3] == 1 && winData[8] == 1 && winData[13] == 1 && winData[18] == 1 && winData[23] == 1) win = true;
+            else if (winData[4] == 1 && winData[9] == 1 && winData[14] == 1 && winData[1] == 1 && winData[24] == 1) win = true;
+
+            else if (winData[0] == 1 && winData[6] == 1 && winData[12] == 1 && winData[18] == 1 && winData[24] == 1) win = true;
+            else if (winData[4] == 1 && winData[8] == 1 && winData[12] == 1 && winData[16] == 1 && winData[20] == 1) win = true;
+        }
+
+
+
+        document.addEventListener("mouseup", mouseUp, true);
+        function mouseUp(event) {
+            togFlag = true;
+        }
+
+        document.addEventListener("mousedown", mouseDown, true);
+        function mouseDown(event) {
+            event.preventDefault();
+        }
+
+
+    </script>
+</body>
+
+</html>
