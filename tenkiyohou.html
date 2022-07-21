@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        .button {
+            display: flex;
+        }
+
+        .tokyo {
+            height: 100px;
+            width: 100px;
+            background-color: aquamarine;
+        }
+
+        .nara {
+            height: 100px;
+            width: 100px;
+            background-color: blanchedalmond;
+        }
+
+        .miyakojima {
+            height: 100px;
+            width: 100px;
+            background-color: darkcyan;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="button">
+        <div class="tokyo">東京</div>
+        <div class="nara">奈良</div>
+        <div class="miyakojima">宮古島</div>
+    </div>
+</body>
+<script>
+    const tokyoButton = document.querySelector(".tokyo");
+    const naraButton = document.querySelector(".nara");
+    const miyakojimaButton = document.querySelector(".miyakojima");
+
+    // API配信のURL
+    // 130000は東京のエリアコード
+
+    // let url_Tokyo = "https://www.jma.go.jp/bosai/forecast/data/overview_forecast/130000.json"
+    // let url_Nara = "https://www.jma.go.jp/bosai/forecast/data/overview_forecast/290000.json"
+    // let url_Miyakojima = "https://www.jma.go.jp/bosai/forecast/data/overview_forecast/473000.json"
+    let url= "https://www.jma.go.jp/bosai/forecast/data/overview_forecast/130000.json"
+
+    tokyoButton.addEventListener('click', function () {
+        url = "https://www.jma.go.jp/bosai/forecast/data/overview_forecast/130000.json"
+        console.log("通過")
+    })
+    naraButton.addEventListener('click', function () {
+        url = "https://www.jma.go.jp/bosai/forecast/data/overview_forecast/290000.json"
+        console.log("通過")
+    })
+    miyakojimaButton.addEventListener('click', function () {
+        url = "https://www.jma.go.jp/bosai/forecast/data/overview_forecast/473000.json"
+    })
+
+
+
+    //データを取得する非同期処理の関数
+    const getWeather = async (url) => {
+        // 指定したurlのAPIからjsonデータを取得
+        const response = await fetch(url)
+        // jsonデータをオブジェクトに変換する
+        return response.json()
+    }
+
+    //データを利用する非同期処理の関数
+    //非同期にしないと、データを取得する前に実行してしまう
+    const getData = async () => {
+        //全データがここに入っている
+        const data = await getWeather(url);
+        console.log(data);
+        //データのキーを指定
+        console.log(data.publishingOffice);
+        console.log(data.reportDatetime);
+        console.log(data.targetArea);
+        console.log(data.text);
+
+        const div = document.createElement("div");
+        div.textContent = data.text;
+        document.querySelector("body").append(div);
+
+    }
+
+    getData()
+</script>
+
+</html>

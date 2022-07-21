@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* .position {
+            position: relative;
+            border: 1px solid gray;
+            height: 2000px;
+            width: 600px;
+        }
+        .position div {
+            position: fixed;
+            top: 80px;
+            left: 200px;
+            background-color: aquamarine;
+        } */
+
+        .childbox {
+            position: absolute;
+            height: 200px;
+            width: 200px;
+        }
+        #child1 {
+            top: 40px;
+            left: 160px;
+            background-color: #cccccc;
+            z-index: 10;
+        }
+        #child2 {
+            top: 100px;
+            left: 240px;
+            background-color: #666666;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- <section class="position">
+        <div>位置された要素</div>
+    </section> -->
+    <div id="parent">
+        <div id="child1" class="childbox">child1</div>
+        <div id="child2" class="childbox">child2</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reversi</title>
+    <style>
+        body {
+            background-color: gray;
+        }
+
+        .container {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            display: grid;
+            grid-template-columns: 100px 100px 100px 100px 100px 100px 100px 100px;
+            gap: 0px;
+            grid-template-rows: 100px 100px 100px 100px 100px 100px 100px 100px;
+        }
+
+        .button {
+            background-color: green;
+            width: 100px;
+            height: 100px;
+            margin: 0;
+            padding: 0;
+            border: 1px black solid;
+            z-index: 1;
+        }
+
+        .koma {
+            position: absolute;
+            top: 315px;
+            left: 315px;
+            width: 90px;
+            height: 90px;
+            /* background-color: black; */
+            border-radius: 50%;
+            z-index: 10;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container"></div>
+
+    <script>
+        const container = document.querySelector(".container");
+        for (let i = 0; i < 64; i++) {
+            const div = document.createElement("div");
+            div.classList.add("button");
+            const koma = document.createElement("div");
+            koma.classList.add("koma");
+            container.append(div);
+            document.querySelector("body").append(koma);
+        }
+        const board = document.querySelectorAll(".button");
+        const komaAll = document.querySelectorAll(".koma");
+
+        let komaX = 0;
+        let komaY = 0;
+        let komaCount = 0;
+
+        let saveData = new Array(64).fill(0);
+
+        for (let i = 0; i < 64; i++) {
+            komaAll[i].style.left = `${komaX + 15}px`;
+            komaAll[i].style.top = `${komaY + 15}px`;
+
+            komaCount++;
+            if (komaCount % 8 == 0) {
+                komaCount = 0;
+                komaY += 100;
+            }
+            komaX = 100 * komaCount;
+
+            komaAll[27].style.backgroundColor = "white";
+            komaAll[28].style.backgroundColor = "black";
+            komaAll[35].style.backgroundColor = "black";
+            komaAll[36].style.backgroundColor = "white";
+            saveData[27] = 2;
+            saveData[28] = 1;
+            saveData[35] = 1;
+            saveData[36] = 2;
+
+            komaAll[34].style.backgroundColor = "white";
+            komaAll[33].style.backgroundColor = "white";
+            saveData[34] = 2;
+            saveData[33] = 2;
+
+            komaAll[37].style.backgroundColor = "white";
+            saveData[37] = 2;
+            komaAll[38].style.backgroundColor = "white";
+            saveData[38] = 2;
+
+            komaAll[i].addEventListener('click', function () {
+                if (saveData[i] == 0) {
+                    revCheck(i,1,1,1);
+                    revCheck(i,1,-1,1);
+                    revCheck(i,8,-1,8);
+                    revCheck(i,8,1,8);
+                    // revCheck(i,7,-1,7);
+                    // revCheck(i,7,1,7);
+                    
+                    // revCheck(i,1,-1);
+                    // revCheck(i,1,-8);
+                    // leftCheck(i);
+                    // revLeftCount = 1;
+                    // rightCheck(i);
+                    // revRightCount = 1;
+                    // topCheck(i);
+                    // revTopCount = 1;
+                }
+            })
+        }
+
+        const revCheck = (i,rc,ad,ap) => {
+            for (let t = 0; t < rc; t++) {
+                if (saveData[i - rc*ad] == 2) {
+                    rc+= rc;
+                    if (saveData[i - rc*ad] == 2) {
+                        console.log("test");
+                        revCheck();
+                    } else if(saveData[i - rc*ad] == 1){
+                        for (let p = 0; p < rc; p+=ap) {
+                            komaAll[i - p*ad].style.backgroundColor = "black";
+                            saveData[i - p*ad] = 1;
+                        }
+                    }
+                }
+            }
+        }
+
+        // const rightCheck = (i) => {
+        //     for (let t = 0; t < revRightCount; t++) {
+        //         if (saveData[i + revRightCount] == 2) {
+        //             ++revRightCount;
+        //             if (saveData[i + revRightCount] == 2) {
+        //                 console.log("test");
+        //                 rightCheck();
+        //             } else {
+        //                 for (let p = 0; p < revRightCount; p++) {
+        //                     komaAll[i + p].style.backgroundColor = "black";
+        //                     saveData[i + p] = 1;
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+
+       
+        let revLeftCount = 1;
+        const leftCheck = (i) => {
+            for (let t = 0; t < revLeftCount; t++) {
+                if (saveData[i - revLeftCount] == 2) {
+                    ++revLeftCount;
+                    if (saveData[i - revLeftCount] == 2) {
+                        console.log("test");
+                        leftCheck();
+                    } else {
+                        for (let p = 0; p < revLeftCount; p++) {
+                            komaAll[i - p].style.backgroundColor = "black";
+                            saveData[i - p] = 1;
+                        }
+                    }
+                }
+            }
+        }
+
+        let revRightCount = 1;
+        const rightCheck = (i) => {
+            for (let t = 0; t < revRightCount; t++) {
+                if (saveData[i + revRightCount] == 2) {
+                    ++revRightCount;
+                    if (saveData[i + revRightCount] == 2) {
+                        console.log("test");
+                        rightCheck();
+                    } else {
+                        for (let p = 0; p < revRightCount; p++) {
+                            komaAll[i + p].style.backgroundColor = "black";
+                            saveData[i + p] = 1;
+                        }
+                    }
+                }
+            }
+        }
+
+        let revTopCount = 8;
+        const topCheck = (i) => {
+            for (let t = 0; t < revTopCount; t++) {
+                if (saveData[i + revTopCount] == 2) {
+                    revTopCount += revTopCount;
+                    if (saveData[i + revTopCount] == 2) {
+                        console.log("test");
+                        topCheck();
+                    } else {
+                        for (let p = 0; p < revTopCount; p+=8) {
+                            komaAll[i + p].style.backgroundColor = "black";
+                            saveData[i + p] = 1;
+                        }
+                    }
+                }
+            }
+        }
+
+
+        // const koma1 = document.createElement("div");
+        // koma1.classList.add("koma");
+        // document.querySelector("body").append(koma1);
+
+        // const koma2 = document.createElement("div");
+        // koma2.classList.add("koma");
+        // koma2.style.top = "415px";
+        // koma2.style.backgroundColor = "white";
+        // document.querySelector("body").append(koma2);
+
+
+
+    </script>
+</body>
+
+</html>
